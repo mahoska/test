@@ -83,21 +83,13 @@ export default {
         axios.post('http://localhost:88/BOOK_SHOP/client/api/auth/', data, this.config)         
         //axios.post('http://192.168.0.15/~user15/BOOK_SHOP/client/api/auth/', data, this.config)
           .then(function (response) {
-            //console.log(response.data.err)
-            console.log()
             if(response.data.err && response.data.err ==true){
               self.err_reg = response.data['data']
               setTimeout(function () {
                 self.err_reg = ""
               },2500);
             }else{
-              alert("ok")
-              //self.is_login_check = true
-              //self.is_not_login_check = false
-              //self.is_login = false
-              //self.is_registr = false
               self.$emit('client_reg',self.is_registr )
-              //self.login = self.rlogin
               self.err_reg = ""
               localStorage['hash_log'] = response.data['data']
               localStorage['user'] = self.rlogin

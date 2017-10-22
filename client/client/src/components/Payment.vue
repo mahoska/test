@@ -46,10 +46,8 @@ export default {
       //axios.get('http://192.168.0.15/~user15/BOOK_SHOP/client/api/payment/', this.config)
             .then(function (response) {
               self.payment_methods = response.data.data 
-              //console.log(self.ganres)
       })
       .catch(function (error) {
-        //console.log(error)
       });
   },
   methods:{
@@ -73,8 +71,7 @@ export default {
               //-----get info about client  
               axios.get('http://localhost:88/BOOK_SHOP/client/api/auth/'+ client_id, self.config)
               //axios.get('http://192.168.0.15/~user15/BOOK_SHOP/client/api/auth/'+ client_id , self.config)
-                  .then(function (response) {
-                     
+                  .then(function (response) {                    
                     if(response.data.status == '200') {
                       self.client = response.data.data 
                       axios.get('http://localhost:88/BOOK_SHOP/client/api/cart/'+ client_id +'/1', self.config)
@@ -227,16 +224,16 @@ export default {
 }
 
 .btn-def, .btn-def-light{
-    width: 100%;
-    color: white; 
-    margin-top: 10px;
-    width: 100px;
-    background-color: #2C3E50;
-    margin-right: 50px;
-  }
+  width: 100%;
+  color: white; 
+  margin-top: 10px;
+  width: 100px;
+  background-color: #2C3E50;
+  margin-right: 50px;
+}
 
 .btn-def-light{
-background-color: #4A838C;
+  background-color: #4A838C;
 }
 
 .cart_info{
