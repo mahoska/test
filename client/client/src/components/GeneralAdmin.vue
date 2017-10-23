@@ -1,62 +1,62 @@
 <template>
   <div class="general container">
     <div class="row">
-      <div class="col-sm-6 col-md-4">
-        <button class="btn  btn-info" @click="addFormOpenAuthor">new Author</button>
+      <div class="col-sm-12 col-md-3">
+      <!--author-->  
+      <div class="section">
+        <router-link class="btn  btn-info"  :to="'/admin/addAuthor'">
+          new Author
+        </router-link>
 
         <div class="form-group">
           <label>Edit or Delete</label>
           <select v-model="author" class="form-control"  @change="changeSelectAuthor()">
             <option value="">select author</option>
-            <option v-for="author in authors" :value="author.id">
+            <option v-for="author in authors" :value="author.id" :key="author.id">
                   {{author.surname}} {{author.name}}
             </option>
           </select>
         </div>
-
+      </div>
+      <!--endauthor--> 
       <!--ganere-->
-        <button class="btn  btn-info" @click="addFormOpenGanre">new Ganre</button>
-
+      <div class="section">
+        <router-link class="btn  btn-info"  :to="'/admin/addGanre'">
+          new Ganre
+        </router-link>
         <div class="form-group">
           <label>Edit or Delete</label>
           <select v-model="ganre" class="form-control"  @change="changeSelectGanre()">
             <option value="">select ganre</option>
-            <option v-for="ganre in ganres" :value="ganre.id">
+            <option v-for="ganre in ganres" :value="ganre.id" :key="ganre.id">
               {{ganre.name}}
             </option>
           </select>
         </div>
       </div>
       <!--endganre-->
+      <!--book-->
+      <div class="section">
+        <router-link class="btn  btn-info"  :to="'/admin/addBook'">
+          new Book
+        </router-link>
 
-      <div class="col-sm-6 col-md-8">
-        <div v-if="is_author" class="add">
-          <div class="lbl_add">Author add form</div>
-          <p class="bg-danger" id="err" style="width: 100%">{{err_author}}</p>
-          <div class="form-group">
-            <label for="inputName">Name</label>
-            <input type="text" class="form-control" id="inputName" placeholder="Enter name" v-model="name">
-          </div>
-          <div class="form-group">
-            <label for="inputSname">Surname</label>
-            <input type="text" class="form-control" id="inputSname" placeholder="Enter surname" v-model="surname">
-          </div>
-          <button  class="btn btn-primary">Add author</button>
+        <div class="form-group">
+          <label>Edit or Delete</label>
+          <select v-model="book" class="form-control"  @change="changeSelectBook()">
+            <option value="">select book</option>
+            <option v-for="book in books" :value="book.id" :key="book.id">
+              {{book.name}}
+            </option>
+          </select>
         </div>
-
-        <!--ganreform-->
-        <div v-if="is_ganre" class="add">
-        <div class="lbl_add">Ganre add form</div>
-          <p class="bg-danger" id="err" style="width: 100%">{{err_ganre}}</p>
-          <div class="form-group">
-            <label for="inputGName">Name</label>
-            <input type="text" class="form-control" id="inputGName" placeholder="Enter name" v-model="ganre_name">
-          </div>
-          <button  class="btn btn-primary">Add ganre</button>
-        </div>
-        <!--end ganreform-->
-
       </div>
+      <!--endbook-->
+      </div>
+
+      <div class="col-sm-12 col-md-9">
+           <router-view></router-view>
+       </div>
     </div>
   </div>
 </template>
@@ -75,13 +75,19 @@ export default {
       surname: "",
       is_author: false,
       author: "",
-      authors: {},
+      authors: [],
 
       err_ganre: "",
       ganre_name: "",
       is_ganre: false,
+      ganres: [],
       ganre: "",
-      ganres: {}
+
+
+      err_book: "",
+      is_book: false,
+      books: [],
+      book: "",
 
     }
   },
@@ -91,32 +97,45 @@ export default {
       //axios.get('http://192.168.0.15/~user15/BOOK_SHOP/client/api/author/', this.config)
             .then(function (response) {
               console.log(response.data);
-                self.authors = response.data['data']
+                self.authors = response.data.data
       })
       .catch(function (error) {
         console.log(error);
       });
 
-      //axios.get('http://localhost:88s/BOOK_SHOP/client/api/ganre/', this.config)
-      axios.get('http://192.168.0.15/~user15/BOOK_SHOP/client/api/ganre/', this.config)
+      axios.get('http://localhost:88/BOOK_SHOP/client/api/ganre/', this.config)
+      //axios.get('http://192.168.0.15/~user15/BOOK_SHOP/client/api/ganre/', this.config)
             .then(function (response) {
               console.log(response.data);
-                self.ganres = response.data['data']
+                self.ganres = response.data.data
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+      axios.get('http://localhost:88/BOOK_SHOP/client/api/book/', this.config)
+      //axios.get('http://192.168.0.15/~user15/BOOK_SHOP/client/api/book/', this.config)
+            .then(function (response) {
+              console.log(response.data);
+                self.books = response.data.data
       })
       .catch(function (error) {
         console.log(error);
       });
   },
   methods:{
-    addFormOpenAuthor(){
-      this.is_author = !this.is_author
-    },
     changeSelectAuthor(){
 
     },
-    addFormOpenGanre(){
-      this.is_ganre = !this.is_ganre
+
+    changeSelectGanre(){
+
+    },
+  
+    changeSelectBook(){
+
     }
+
   }
 }
 </script>
@@ -125,18 +144,10 @@ export default {
 <style scoped>
 .general{
   text-align: left;
+  color: #FFF;
 }
 
-.add{
-  border: 1px solid lightgray;
-  border-radius: 5px;
-  padding:20px;
-  margin-bottom:20px;
-}
-
-.lbl_add{
-  text-align:right;
-  font-weight:bold;
-  text-decoration:underline;
+.section{
+  margin-bottom: 50px;
 }
 </style>

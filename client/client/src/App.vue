@@ -36,7 +36,7 @@
             <button class="btn btn-auth" @click="flogin" >login</button>
             <router-link  :to="'/registration'"   class="btn btn-auth">
               Registration
-              </router-link>
+            </router-link>
           </div>         
         <!--end log form-->
         <!--is_login_check form-->
@@ -64,6 +64,9 @@
     </table>
   
     <div class="content">
+      <router-link  :to="'/admin'"   class="btn btn-auth" style="position:relative">
+             Admin
+    </router-link>
       <router-view :filterstring="search_param"
       :log="is_login_check"  
       @setlogout="logout" 
@@ -315,5 +318,19 @@ img.bg {
 
 .btn:hover{
   color:#FFF;
+}
+
+/*admin*/
+.add{
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding:20px;
+  margin-bottom:20px;
+}
+
+.lbl_add{
+  text-align:right;
+  font-weight:bold;
+  text-decoration:underline;
 }
 </style>

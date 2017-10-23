@@ -8,6 +8,10 @@ import Book from '@/components/Book'
 import Payment from '@/components/Payment'
 import Order from '@/components/Order'
 
+import AddGanre from '@/components/AddGanre'
+import AddAuthor from '@/components/AddAuthor'
+import AddBook from '@/components/AddBook'
+
 Vue.use(Router)
 
 export default new Router({
@@ -18,9 +22,14 @@ export default new Router({
       component: General
     },
     {
-      path: '/admin',
+      path: '/admin/',
       name: 'GeneralAdmin',
       component: GeneralAdmin,
+      children: [
+        { path: 'addGanre', name: 'addGanre',component: AddGanre },
+        { path: 'addAuthor', name: 'addAuthor',component: AddAuthor },
+        { path: 'addBook', name: 'addBook',component: AddBook },
+      ]
     },
     {
       path: '/registration',

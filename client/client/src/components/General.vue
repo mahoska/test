@@ -35,12 +35,6 @@
           </div>
         </div>
         <!-- end booklist-->
-        <!--bookItem-->
-        <!--div v-if="show_book_item">
-          <book-item :bookId="show_book_item_id" @changeCountTotal="changeOrder"></book-item>
-        </div-->
-        <!-- end bookItem-->
-
       </div>
     </div>
   </div>

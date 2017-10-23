@@ -14,7 +14,8 @@ abstract class Model{
         $this->pdo = null;
     }
     
-    public function getFetchAccoss($sth){
+    public function getFetchAccoss($sth)
+    {
         $collection = [];
         while($res = $sth->fetch(\PDO::FETCH_ASSOC)){
         $collection[] = $res;
@@ -22,5 +23,6 @@ abstract class Model{
          return $collection;
     }
     
+   
 }
 
